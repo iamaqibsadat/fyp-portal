@@ -14,13 +14,13 @@ const StudentDashboard = () => {
     const fetchProfileAndProjects = async () => {
       try {
         const token = localStorage.getItem('token');
-        const profileResponse = await axios.get('http://localhost:3000/api/auth/profile', {
+        const profileResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/auth/profile', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        const projectsResponse = await axios.get('http://localhost:3000/api/projects/myprojects', {
+        const projectsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/projects/myprojects', {
           headers: {
             Authorization: `Bearer ${token}`
           }
