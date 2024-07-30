@@ -16,11 +16,11 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const projectsResponse = await axios.get('http://localhost:3000/api/admin/projects');
-        const studentsResponse = await axios.get('http://localhost:3000/api/admin/total-students');
-        const supervisorsResponse = await axios.get('http://localhost:3000/api/admin/total-supervisors');
-        const totalProjectsResponse = await axios.get('http://localhost:3000/api/admin/total-projects');
-        const studentsWithProjectsResponse = await axios.get('http://localhost:3000/api/admin/students-with-projects');
+        const projectsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/projects');
+        const studentsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/total-students');
+        const supervisorsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/total-supervisors');
+        const totalProjectsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/total-projects');
+        const studentsWithProjectsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/students-with-projects');
 
         setProjects(projectsResponse.data);
         setTotalStudents(studentsResponse.data.totalStudents);
