@@ -12,15 +12,18 @@ const AdminDashboard = () => {
   const [totalProjects, setTotalProjects] = useState(0);
   const [studentsWithProjects, setStudentsWithProjects] = useState(0);
   const navigate = useNavigate();
+  
+  // Get the API base URL from environment variables
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const projectsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/projects');
-        const studentsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/total-students');
-        const supervisorsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/total-supervisors');
-        const totalProjectsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/total-projects');
-        const studentsWithProjectsResponse = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/students-with-projects');
+        const projectsResponse = await axios.get(`${API_BASE_URL}/admin/projects`);
+        const studentsResponse = await axios.get(`${API_BASE_URL}/admin/total-students`);
+        const supervisorsResponse = await axios.get(`${API_BASE_URL}/admin/total-supervisors`);
+        const totalProjectsResponse = await axios.get(`${API_BASE_URL}/admin/total-projects`);
+        const studentsWithProjectsResponse = await axios.get(`${API_BASE_URL}/admin/students-with-projects`);
 
         setProjects(projectsResponse.data);
         setTotalStudents(studentsResponse.data.totalStudents);
@@ -33,7 +36,7 @@ const AdminDashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [API_BASE_URL]);
 
   const projectStatusData = {
     labels: ['Accepted', 'Rejected', 'Pending'],
