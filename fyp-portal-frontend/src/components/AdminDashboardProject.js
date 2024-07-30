@@ -13,10 +13,13 @@ const Projects = () => {
   const [projectToDelete, setProjectToDelete] = useState(null);
   const navigate = useNavigate();
 
+  // Get the API base URL from environment variables
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/projects');
+        const response = await axios.get(`${API_BASE_URL}/admin/projects`);
         setProjects(response.data);
         setLoading(false);
       } catch (error) {
@@ -25,7 +28,7 @@ const Projects = () => {
     };
 
     fetchProjects();
-  }, []);
+  }, [API_BASE_URL]);
 
   const handleEdit = (id) => {
     try {
@@ -42,7 +45,7 @@ const Projects = () => {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`https://fyp-portal-backend.onrender.com/api/admin/projects/${projectToDelete}`);
+      await axios.delete(`${API_BASE_URL}/admin/projects/${projectToDelete}`);
       setProjects(projects.filter(project => project._id !== projectToDelete));
       setShowModal(false);
     } catch (error) {
@@ -70,16 +73,16 @@ const Projects = () => {
   }
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       <Sidebar />
 
-      <div className="flex-grow mt-16 md:mt-4 md:ml-4">
-        <div className="container flex flex-col md:flex-row items-center justify-center w-auto h-16 bg-gray-100 mt-4 md:mt-16 md:pr-4 px-4 md:px-0">
+      <div className="flex-grow mt-16 md:mt-4 md:ml-4 p-4">
+        <div className="container flex flex-col md:flex-row items-center justify-center w-full h-16 bg-gray-100 mt-4 md:mt-16 md:pr-4 px-4 md:px-0">
           <span className="font-bold mr-2">Department Name:</span>
           <span>Computer Science and IT</span>
         </div>
 
-        <div className="w-full md:w-auto mt-5 mb-10 p-4 md:p-8 rounded-lg bg-gray-100">
+        <div className="w-full mt-5 mb-10 p-4 md:p-8 rounded-lg bg-gray-100">
           <span className="font-semibold ml-5">Total Projects</span>
 
           {/* SearchBar */}
@@ -114,7 +117,7 @@ const Projects = () => {
 
           <div className="overflow-x-auto mt-4">
             <table className="table-auto w-full border-collapse border border-gray-200 shadow-md rounded-lg">
-              <thead className="">
+              <thead>
                 <tr className="header bg-[#6f5cc3] text-white">
                   <th className="px-4 py-3 text-left">Group #</th>
                   <th className="px-4 py-3 text-left">Project Name</th>
@@ -125,13 +128,13 @@ const Projects = () => {
                   <th className="px-4 py-3 text-center">Actions</th>
                 </tr>
               </thead>
-              <tbody className="">
+              <tbody>
                 {filteredProjects.map((project, index) => (
                   <tr key={index} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
                     <td className="px-4 py-2 border-t border-gray-200">{index + 1}</td>
                     <td className="px-4 py-2 border-t border-gray-200">{project.projectTitle}</td>
                     <td className="px-4 py-2 border-t border-gray-200">{project.supervisor?.profile?.fullName || 'N/A'}</td>
-                    <td className="px-4 py-2 border-t border-gray-200">{project.groupMembers.length + 1}</td> {/* Incremented by 1 */}
+                    <td className="px-4 py-2 border-t border-gray-200">{project.groupMembers.length + 1}</td>
                     <td className="px-4 py-2 border-t border-gray-200">{project.projectType}</td>
                     <td className="px-4 py-2 border-t border-gray-200">
                       <span className={`px-2 py-1 text-xs font-medium rounded ${project.status === 'accepted' ? 'bg-green-100 text-green-700' : project.status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}`}>
