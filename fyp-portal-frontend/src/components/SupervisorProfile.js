@@ -21,7 +21,7 @@ const SupervisorProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/auth/profile', {
+        const response = await axios.get('https://fyp-portal-backend.onrender.com/api/auth/profile', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -64,7 +64,7 @@ const SupervisorProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put('http://localhost:3000/api/auth/profile', profile, {
+      await axios.put('https://fyp-portal-backend.onrender.com/api/auth/profile', profile, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
