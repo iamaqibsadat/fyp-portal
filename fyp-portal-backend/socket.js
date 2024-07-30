@@ -4,7 +4,7 @@ module.exports = {
   init: httpServer => {
     io = require('socket.io')(httpServer, {
       cors: {
-        origin: 'https://fyp-portal-backend.onrender.com',
+        origin: 'https://fyp-portal-frontend.onrender.com',
         methods: ['GET', 'POST']
       }
     });
