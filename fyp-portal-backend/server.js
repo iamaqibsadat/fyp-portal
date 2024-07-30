@@ -1,8 +1,14 @@
 const express = require('express');
 const http = require('http');
-const socketIO = require('socket.io');
-const app = require('./app');
+const path = require('path');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
 const socket = require('./socket');
+const app = require('./app');
+
+dotenv.config();
+
 const PORT = process.env.PORT || 3001;
 
 // Create an HTTP server and pass the Express app to it
@@ -24,6 +30,14 @@ io.on('connection', (socket) => {
   socket.on('message', (message) => {
     io.emit('message', message);
   });
+});
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Catch-all route to serve index.html for SPA routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 // Start the server
