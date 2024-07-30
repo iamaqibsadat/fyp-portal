@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Sidebar from "./Sidebar";
 import { Doughnut, PolarArea } from 'react-chartjs-2';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Sidebar from './Sidebar';
 import 'chart.js/auto';
 
 const AdminDashboard = () => {
@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const [totalProjects, setTotalProjects] = useState(0);
   const [studentsWithProjects, setStudentsWithProjects] = useState(0);
   const navigate = useNavigate();
-  
+
   // Get the API base URL from environment variables
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -68,45 +68,45 @@ const AdminDashboard = () => {
   const recentProjects = projects.slice(0, 5);
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
-      <div className="flex-grow p-6">
-        <h1 className="text-3xl font-semibold mb-6">Admin Dashboard</h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
+      <Sidebar className="md:w-1/4" />
+      <div className="flex-grow p-4 md:p-6">
+        <h1 className="text-2xl md:text-3xl font-semibold mb-4 md:mb-6 mt-4 md:mt-0">Admin Dashboard</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
           <div
-            className="bg-white shadow-lg rounded-lg p-6 text-center cursor-pointer"
+            className="bg-white shadow-lg rounded-lg p-4 text-center cursor-pointer"
             onClick={() => navigate('/AdminDashboardProject')}
           >
-            <h2 className="text-xl font-semibold">Total Projects</h2>
-            <p className="text-4xl font-bold text-purple-600">{totalProjects}</p>
+            <h2 className="text-lg md:text-xl font-semibold">Total Projects</h2>
+            <p className="text-2xl md:text-4xl font-bold text-purple-600">{totalProjects}</p>
           </div>
           <div
-            className="bg-white shadow-lg rounded-lg p-6 text-center cursor-pointer"
+            className="bg-white shadow-lg rounded-lg p-4 text-center cursor-pointer"
             onClick={() => navigate('/AdminDashboardStudent')}
           >
-            <h2 className="text-xl font-semibold">Total Students</h2>
-            <p className="text-4xl font-bold text-blue-600">{totalStudents}</p>
+            <h2 className="text-lg md:text-xl font-semibold">Total Students</h2>
+            <p className="text-2xl md:text-4xl font-bold text-blue-600">{totalStudents}</p>
           </div>
           <div
-            className="bg-white shadow-lg rounded-lg p-6 text-center cursor-pointer"
+            className="bg-white shadow-lg rounded-lg p-4 text-center cursor-pointer"
             onClick={() => navigate('/AdminDashboardSupervisors')}
           >
-            <h2 className="text-xl font-semibold">Total Supervisors</h2>
-            <p className="text-4xl font-bold text-green-600">{totalSupervisors}</p>
+            <h2 className="text-lg md:text-xl font-semibold">Total Supervisors</h2>
+            <p className="text-2xl md:text-4xl font-bold text-green-600">{totalSupervisors}</p>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="bg-white shadow-lg rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Project Status</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
+          <div className="bg-white shadow-lg rounded-lg p-4 md:p-6">
+            <h2 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Project Status</h2>
             <PolarArea data={projectStatusData} />
           </div>
-          <div className="bg-white shadow-lg rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Students with Projects</h2>
+          <div className="bg-white shadow-lg rounded-lg p-4 md:p-6">
+            <h2 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Students with Projects</h2>
             <Doughnut data={studentsWithProjectsData} />
           </div>
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">Recent Projects</h2>
+        <div className="bg-white shadow-lg rounded-lg p-4 md:p-6">
+          <h2 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Recent Projects</h2>
           <div className="overflow-x-auto">
             <table className="table-auto w-full">
               <thead>
