@@ -18,7 +18,7 @@ function SupervisorProReqDetails() {
           throw new Error('No token found');
         }
 
-        const response = await axios.get(`http://localhost:3000/api/projects/requests/${id}`, {
+        const response = await axios.get(`https://fyp-portal-backend.onrender.com/api/projects/requests/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -41,7 +41,7 @@ function SupervisorProReqDetails() {
         throw new Error('No token found');
       }
 
-      const response = await axios.put(`http://localhost:3000/api/projects/requests/${projectId}/accept`, {}, {
+      const response = await axios.put(`https://fyp-portal-backend.onrender.com/api/projects/requests/${projectId}/accept`, {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -61,7 +61,7 @@ function SupervisorProReqDetails() {
         throw new Error('No token found');
       }
 
-      const response = await axios.put(`http://localhost:3000/api/projects/requests/${projectId}/reject`, {}, {
+      const response = await axios.put(`https://fyp-portal-backend.onrender.com/api/projects/requests/${projectId}/reject`, {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
