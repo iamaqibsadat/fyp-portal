@@ -17,7 +17,7 @@ const StudentProject = () => {
           throw new Error('No token found');
         }
 
-        const response = await axios.get('${API_BASE_URL}/api/projects/myprojects', {
+        const response = await axios.get('https://fyp-portal-backend.onrender.com/api/api/projects/myprojects', {
           headers: {
             Authorization: `Bearer ${token}`
           }
