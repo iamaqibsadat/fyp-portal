@@ -13,7 +13,7 @@ const Tasks = () => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:3000/api/tasks', {
+        const response = await axios.get('https://fyp-portal-backend.onrender.com/api/tasks', {
           headers: {
             Authorization: `Bearer ${token}`
           }
