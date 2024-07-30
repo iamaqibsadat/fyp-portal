@@ -26,7 +26,7 @@ const StudentProjectCreation = () => {
   useEffect(() => {
     const fetchSupervisors = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/supervisors', {
+        const response = await axios.get('https://fyp-portal-backend.onrender.com/api/supervisors', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -106,7 +106,7 @@ const StudentProjectCreation = () => {
     try {
       const proposalUrl = await handleUpload();
       const completeFormData = { ...formData, proposalUrl };
-      const response = await axios.post('http://localhost:3000/api/projects', completeFormData, {
+      const response = await axios.post('https://fyp-portal-backend.onrender.com/api/projects', completeFormData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json'
