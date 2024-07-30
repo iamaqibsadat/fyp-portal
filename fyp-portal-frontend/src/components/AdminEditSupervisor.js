@@ -12,7 +12,7 @@ const AdminEditSupervisor = () => {
   useEffect(() => {
     const fetchSupervisor = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/supervisors/${id}`);
+        const response = await axios.get(`https://fyp-portal-backend.onrender.com/api/supervisors/${id}`);
         const supervisorData = response.data;
 
         setProfile({
@@ -47,7 +47,7 @@ const AdminEditSupervisor = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:3000/api/supervisors/supervisors/${id}`, profile, {
+      await axios.put(`https://fyp-portal-backend.onrender.com/api/supervisors/supervisors/${id}`, profile, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
