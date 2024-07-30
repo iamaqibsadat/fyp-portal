@@ -23,19 +23,19 @@ const ProjectDetails = () => {
           throw new Error('No token found');
         }
 
-        const projectResponse = await axios.get(`http://localhost:3000/api/projects/requests/${projectId}`, {
+        const projectResponse = await axios.get(`https://fyp-portal-backend.onrender.com/api/projects/requests/${projectId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        const meetingsResponse = await axios.get(`http://localhost:3000/api/meetings/${projectId}`, {
+        const meetingsResponse = await axios.get(`https://fyp-portal-backend.onrender.com/api/meetings/${projectId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        const tasksResponse = await axios.get(`http://localhost:3000/api/tasks/${projectId}`, {
+        const tasksResponse = await axios.get(`https://fyp-portal-backend.onrender.com/api/tasks/${projectId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -58,7 +58,7 @@ const ProjectDetails = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:3000/api/meetings`, {
+      await axios.post(`https://fyp-portal-backend.onrender.com/api/meetings`, {
         meetingType: meetingType.value,
         time: time.value,
         location: location.value,
@@ -70,7 +70,7 @@ const ProjectDetails = () => {
         }
       });
       // Refresh meetings list
-      const meetingsResponse = await axios.get(`http://localhost:3000/api/meetings/${projectId}`, {
+      const meetingsResponse = await axios.get(`https://fyp-portal-backend.onrender.com/api/meetings/${projectId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -87,7 +87,7 @@ const ProjectDetails = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:3000/api/tasks`, {
+      await axios.post(`https://fyp-portal-backend.onrender.com/api/tasks`, {
         title: title.value,
         assignedTo: assignedTo.value,
         dueDate: dueDate.value,
@@ -98,7 +98,7 @@ const ProjectDetails = () => {
         }
       });
       // Refresh tasks list
-      const tasksResponse = await axios.get(`http://localhost:3000/api/tasks/${projectId}`, {
+      const tasksResponse = await axios.get(`https://fyp-portal-backend.onrender.com/api/tasks/${projectId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
