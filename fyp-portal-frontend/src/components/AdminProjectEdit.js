@@ -17,10 +17,13 @@ const AdminProjectEdit = () => {
     groupMembers: '',
   });
 
+  // Get the API base URL from environment variables
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`https://fyp-portal-backend.onrender.com/api/admin/projects/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/admin/projects/${id}`);
         const projectData = response.data;
 
         // Populate the form fields with existing project data
@@ -35,11 +38,12 @@ const AdminProjectEdit = () => {
         });
       } catch (error) {
         console.error('Error fetching project:', error);
+        alert('Error fetching project. Please try again.');
       }
     };
 
     fetchProject();
-  }, [id]);
+  }, [id, API_BASE_URL]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,21 +59,23 @@ const AdminProjectEdit = () => {
         groupMembers: formData.groupMembers.split(',').map((member) => member.trim()),
       };
 
-      await axios.put(`https://fyp-portal-backend.onrender.com/api/admin/projects/${id}`, updatedData);
+      await axios.put(`${API_BASE_URL}/admin/projects/${id}`, updatedData);
+      alert('Project updated successfully!');
       navigate('/AdminDashboardProject');
     } catch (error) {
       console.error('Error updating project:', error);
+      alert('Error updating project. Please try again.');
     }
   };
 
   return (
     <div>
       <Sidebar />
-      <div className='container flex ml-72 mr-12 items-center justify-center w-auto h-16 bg-gray-100 mt-16 '>
-        <span className='font-bold'>Department Name: </span>
+      <div className='container flex ml-72 mr-12 items-center justify-center w-auto h-16 bg-gray-100 mt-16'>
+        <span className='font-bold'>Department Name:</span>
         <span>Computer Science and IT</span>
       </div>
-      <div className='w-[930px] ml-72 mt-5 h-96 mb-36 rounded-lg bg-gray-100'>
+      <div className='w-[930px] ml-72 mt-5 h-auto mb-36 rounded-lg bg-gray-100'>
         <div className='bg-purple-300 h-10 w-5/3 mt-3 rounded-lg'>
           <span className='ml-4 font-bold'>Project Edit Form</span>
         </div>
@@ -77,7 +83,7 @@ const AdminProjectEdit = () => {
           <form className='bg-white shadow-md rounded-lg p-6 w-full' onSubmit={handleSubmit}>
             <div className='grid grid-cols-2 gap-6 w-5/6'>
               <div className='col-span-1'>
-                <div className='mb-4 flex items-center'>
+                <div className='mb-4'>
                   <label htmlFor='projectTitle' className='block text-sm font-semibold text-gray-700'>
                     Project Title:
                   </label>
@@ -91,8 +97,8 @@ const AdminProjectEdit = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className='mb-4 flex items-center'>
-                  <label htmlFor='description' className='block text-sm font-semibold text-gray-700 -ml-2'>
+                <div className='mb-4'>
+                  <label htmlFor='description' className='block text-sm font-semibold text-gray-700'>
                     Description:
                   </label>
                   <textarea
@@ -105,8 +111,8 @@ const AdminProjectEdit = () => {
                     onChange={handleChange}
                   ></textarea>
                 </div>
-                <div className='mb-4 flex items-center'>
-                  <label htmlFor='proposal' className='block text-sm font-semibold text-gray-700 mr-2'>
+                <div className='mb-4'>
+                  <label htmlFor='proposal' className='block text-sm font-semibold text-gray-700'>
                     Proposal:
                   </label>
                   <input
@@ -114,7 +120,7 @@ const AdminProjectEdit = () => {
                     id='proposal'
                     name='proposal'
                     placeholder='No files Uploaded'
-                    className='focus:ring-indigo-500 bg-gray-200 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 border-2 rounded-md'
+                    className='mt-1 focus:ring-indigo-500 bg-gray-200 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 border-2 rounded-md'
                     value={formData.proposal}
                     onChange={handleChange}
                   />
@@ -122,8 +128,8 @@ const AdminProjectEdit = () => {
               </div>
 
               <div className='col-span-1'>
-                <div className='mb-4 flex items-center'>
-                  <label htmlFor='projectType' className='block text-sm font-semibold text-gray-700 mr-2'>
+                <div className='mb-4'>
+                  <label htmlFor='projectType' className='block text-sm font-semibold text-gray-700'>
                     Project Type:
                   </label>
                   <select
@@ -140,8 +146,8 @@ const AdminProjectEdit = () => {
                     <option value='Flutter'>Flutter</option>
                   </select>
                 </div>
-                <div className='mb-4 flex items-center'>
-                  <label htmlFor='supervisor' className='block text-sm font-semibold text-gray-700 mr-2'>
+                <div className='mb-4'>
+                  <label htmlFor='supervisor' className='block text-sm font-semibold text-gray-700'>
                     Supervisor:
                   </label>
                   <input
@@ -154,8 +160,8 @@ const AdminProjectEdit = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className='mb-4 flex items-center'>
-                  <label htmlFor='program' className='block text-sm font-semibold text-gray-700 mr-4'>
+                <div className='mb-4'>
+                  <label htmlFor='program' className='block text-sm font-semibold text-gray-700'>
                     Program:
                   </label>
                   <select
@@ -172,7 +178,7 @@ const AdminProjectEdit = () => {
                     <option value='BS Networking'>BS Networking</option>
                   </select>
                 </div>
-                <div className='mb-4 flex items-center'>
+                <div className='mb-4'>
                   <label htmlFor='groupMembers' className='block text-sm font-semibold text-gray-700'>
                     Group Members:
                   </label>
@@ -182,18 +188,18 @@ const AdminProjectEdit = () => {
                     name='groupMembers'
                     placeholder='Enter Group Members IDs'
                     autoComplete='groupMembers'
-                    className='mt-1 -ml-3 focus:ring-indigo-500 bg-gray-200 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 border-2 rounded-md'
+                    className='mt-1 focus:ring-indigo-500 bg-gray-200 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 border-2 rounded-md'
                     value={formData.groupMembers}
                     onChange={handleChange}
                   />
                 </div>
 
-                <div className='ml-72'>
+                <div className='flex justify-center'>
                   <button
                     type='submit'
-                    className='text-white bg-purple-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-800 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+                    className='text-white bg-purple-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2'
                   >
-                    APPLY
+                    Apply
                   </button>
                 </div>
               </div>
