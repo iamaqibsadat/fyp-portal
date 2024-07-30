@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware for CORS
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Fallback to localhost for development
+  origin: 'https://fyp-portal-frontend.onrender.com', // Your frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
