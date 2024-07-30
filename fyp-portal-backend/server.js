@@ -1,8 +1,9 @@
 const express = require('express');
 const http = require('http');
+const socketIO = require('socket.io');
 const dotenv = require('dotenv');
-const socket = require('./socket');
 const app = require('./app');
+const socket = require('./socket');
 
 dotenv.config();
 
