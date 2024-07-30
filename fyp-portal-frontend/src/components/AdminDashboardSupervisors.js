@@ -12,11 +12,14 @@ function AdminDashboardSupervisors() {
   const [supervisorToDelete, setSupervisorToDelete] = useState(null);
   const navigate = useNavigate();
 
+  // Get the API base URL from environment variables
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const fetchSupervisors = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get("https://fyp-portal-backend.onrender.com/api/supervisors", {
+        const response = await axios.get(`${API_BASE_URL}/supervisors`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -28,7 +31,7 @@ function AdminDashboardSupervisors() {
     };
 
     fetchSupervisors();
-  }, []);
+  }, [API_BASE_URL]);
 
   const handleDeleteClick = (id) => {
     setSupervisorToDelete(id);
@@ -38,7 +41,7 @@ function AdminDashboardSupervisors() {
   const handleDeleteConfirm = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://fyp-portal-backend.onrender.com/api/supervisors/${supervisorToDelete}`, {
+      await axios.delete(`${API_BASE_URL}/supervisors/${supervisorToDelete}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
