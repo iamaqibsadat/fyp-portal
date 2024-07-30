@@ -20,7 +20,7 @@ const AdminProjectEdit = () => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/admin/projects/${id}`);
+        const response = await axios.get(`https://fyp-portal-backend.onrender.com/api/admin/projects/${id}`);
         const projectData = response.data;
 
         // Populate the form fields with existing project data
@@ -55,7 +55,7 @@ const AdminProjectEdit = () => {
         groupMembers: formData.groupMembers.split(',').map((member) => member.trim()),
       };
 
-      await axios.put(`http://localhost:3000/api/admin/projects/${id}`, updatedData);
+      await axios.put(`https://fyp-portal-backend.onrender.com/api/admin/projects/${id}`, updatedData);
       navigate('/AdminDashboardProject');
     } catch (error) {
       console.error('Error updating project:', error);
