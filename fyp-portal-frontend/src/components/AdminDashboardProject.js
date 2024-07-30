@@ -16,7 +16,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/admin/projects');
+        const response = await axios.get('https://fyp-portal-backend.onrender.com/api/admin/projects');
         setProjects(response.data);
         setLoading(false);
       } catch (error) {
@@ -42,7 +42,7 @@ const Projects = () => {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`http://localhost:3000/api/admin/projects/${projectToDelete}`);
+      await axios.delete(`https://fyp-portal-backend.onrender.com/api/admin/projects/${projectToDelete}`);
       setProjects(projects.filter(project => project._id !== projectToDelete));
       setShowModal(false);
     } catch (error) {
