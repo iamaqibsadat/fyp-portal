@@ -21,7 +21,7 @@ const Comments = () => {
           throw new Error('No token found');
         }
         console.log(`Fetching comments for project ID: ${projectId}`);
-        const response = await axios.get(`http://localhost:3000/api/projects/${projectId}/comments`, {
+        const response = await axios.get(`https://fyp-portal-backend.onrender.com/api/projects/${projectId}/comments`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -43,7 +43,7 @@ const Comments = () => {
     try {
       const token = localStorage.getItem('token');
       console.log('Adding comment:', newComment);
-      const response = await axios.post(`http://localhost:3000/api/projects/${projectId}/comments`, {
+      const response = await axios.post(`https://fyp-portal-backend.onrender.com/api/projects/${projectId}/comments`, {
         comment: newComment
       }, {
         headers: {
