@@ -20,7 +20,7 @@ function SupervisorProjectRequest() {
         throw new Error('No token found');
       }
 
-      const response = await axios.get('${API_BASE_URL}/api/projects/requests', {
+      const response = await axios.get('https://fyp-portal-frontend.onrender.com//api/projects/requests', {
         headers: {
           Authorization: `Bearer ${token}`
         }
