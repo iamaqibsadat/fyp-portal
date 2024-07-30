@@ -7,12 +7,25 @@ const AdminEditSupervisor = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState({
+    fullName: "",
+    regNo: "",
+    email: "",
+    phoneNo: "",
+    designation: "",
+    interestedArea: "",
+    projectType: "",
+    program: "",
+    levelOfStudies: "",
+  });
+
+  // Get the API base URL from environment variables
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const fetchSupervisor = async () => {
       try {
-        const response = await axios.get(`https://fyp-portal-backend.onrender.com/api/supervisors/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/supervisors/${id}`);
         const supervisorData = response.data;
 
         setProfile({
@@ -32,7 +45,7 @@ const AdminEditSupervisor = () => {
     };
 
     fetchSupervisor();
-  }, [id]);
+  }, [id, API_BASE_URL]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +60,7 @@ const AdminEditSupervisor = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`https://fyp-portal-backend.onrender.com/api/supervisors/supervisors/${id}`, profile, {
+      await axios.put(`${API_BASE_URL}/supervisors/${id}`, profile, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
