@@ -17,7 +17,7 @@ function AdminDashboardStudent() {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/admin/students");
+      const response = await axios.get("https://fyp-portal-backend.onrender.com/api/admin/students");
       setStudents(response.data);
     } catch (error) {
       console.error("Error fetching students:", error);
@@ -31,7 +31,7 @@ function AdminDashboardStudent() {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`http://localhost:3000/api/admin/students/${studentToDelete}`);
+      await axios.delete(`https://fyp-portal-backend.onrender.com/api/admin/students/${studentToDelete}`);
       setStudents(students.filter(student => student._id !== studentToDelete));
       setShowModal(false);
     } catch (error) {
