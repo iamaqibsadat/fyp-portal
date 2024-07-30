@@ -12,7 +12,7 @@ const SupervisorProjectsUnderMe = () => {
     const fetchProjects = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:3000/api/projects/supervisor', {
+        const response = await axios.get('https://fyp-portal-backend.onrender.com/api/projects/supervisor', {
           headers: {
             Authorization: `Bearer ${token}`
           }
