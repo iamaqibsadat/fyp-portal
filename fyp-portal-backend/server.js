@@ -33,11 +33,11 @@ io.on('connection', (socket) => {
 });
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'fyp-portal-frontend/build')));
 
 // Catch-all route to serve index.html for SPA routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'fyp-portal-frontend/build', 'index.html'));
 });
 
 // Start the server
