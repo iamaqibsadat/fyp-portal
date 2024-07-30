@@ -20,7 +20,7 @@ function SupervisorProjectRequest() {
         throw new Error('No token found');
       }
 
-      const response = await axios.get('https://fyp-portal-backend.onrender.com/api/projects/requests', {
+      const response = await axios.get('${API_BASE_URL}/api/projects/requests', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -38,17 +38,17 @@ function SupervisorProjectRequest() {
   };
 
   return (
-    <div className="flex">
-      <SupervisorSidebar />
+    <div className="flex flex-col md:flex-row">
+      <SupervisorSidebar className="md:w-1/4" />
       <div className="flex-grow mt-16 md:mt-4 md:ml-4">
         <div className="container flex flex-col md:flex-row items-center justify-center w-auto h-16 bg-gray-100 mt-4 md:mt-16 md:pr-4 px-4 md:px-0">
           <span className="font-bold mr-2">Department Name:</span>
           <span>Computer Science and IT</span>
         </div>
 
-        <div className="w-full md:w-auto mt-5 mb-10 p-4 md:p-8 rounded-lg bg-gray-100">
+        <div className="w-full md:w-auto mx-auto mt-5 mb-10 p-4 md:p-8 rounded-lg bg-gray-100">
           <span className="font-semibold ml-5">Project Requests</span>
-          
+
           <div className="overflow-x-auto mt-4">
             <table className="table-auto w-full border-collapse border border-gray-200 shadow-md rounded-lg">
               <thead className="">
