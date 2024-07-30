@@ -17,7 +17,7 @@ const Meeting = () => {
         throw new Error('No token found');
       }
 
-      const response = await axios.get('http://localhost:3000/api/meetings/meetings', {
+      const response = await axios.get('https://fyp-portal-backend.onrender.com/api/meetings/meetings', {
         headers: {
           Authorization: `Bearer ${token}`
         }
