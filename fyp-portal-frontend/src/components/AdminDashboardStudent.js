@@ -11,13 +11,16 @@ function AdminDashboardStudent() {
   const [showModal, setShowModal] = useState(false);
   const [studentToDelete, setStudentToDelete] = useState(null);
 
+  // Get the API base URL from environment variables
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     fetchStudents();
   }, []);
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("https://fyp-portal-backend.onrender.com/api/admin/students");
+      const response = await axios.get(`${API_BASE_URL}/admin/students`);
       setStudents(response.data);
     } catch (error) {
       console.error("Error fetching students:", error);
@@ -31,7 +34,7 @@ function AdminDashboardStudent() {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`https://fyp-portal-backend.onrender.com/api/admin/students/${studentToDelete}`);
+      await axios.delete(`${API_BASE_URL}/admin/students/${studentToDelete}`);
       setStudents(students.filter(student => student._id !== studentToDelete));
       setShowModal(false);
     } catch (error) {
@@ -94,7 +97,7 @@ function AdminDashboardStudent() {
 
           <div className="overflow-x-auto mt-4">
             <table className="table-auto w-full border-collapse border border-gray-200 shadow-md rounded-lg">
-              <thead className="">
+              <thead>
                 <tr className="header bg-[#6f5cc3] text-white">
                   <th className="px-4 py-3 text-left">Serial No</th>
                   <th className="px-4 py-3 text-left">Batch No</th>
@@ -107,7 +110,7 @@ function AdminDashboardStudent() {
                   <th className="px-4 py-3 text-center">Actions</th>
                 </tr>
               </thead>
-              <tbody className="">
+              <tbody>
                 {filteredStudents.map((student, index) => (
                   <tr key={index} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
                     <td className="px-4 py-2 border-t border-gray-200">{index + 1}</td>
