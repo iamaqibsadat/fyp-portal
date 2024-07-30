@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import io from 'socket.io-client';
 import './Chat.css';
 
-const socket = io('http://localhost:3001');
+const socket = io('https://fyp-portal-backend.onrender.com');
 
 const Chat = ({ projectId }) => {
   const { user } = useAuth();
@@ -14,7 +14,7 @@ const Chat = ({ projectId }) => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/projects/${projectId}/messages`, {
+        const response = await axios.get(`https://fyp-portal-backend.onrender.com/api/projects/${projectId}/messages`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -45,7 +45,7 @@ const Chat = ({ projectId }) => {
     if (!newMessage) return;
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/projects/${projectId}/messages`, {
+      const response = await axios.post(`https://fyp-portal-backend.onrender.com/api/projects/${projectId}/messages`, {
         content: newMessage,
       }, {
         headers: {
