@@ -27,7 +27,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', {
+      const response = await axios.post('https://fyp-portal-backend.onrender.com/api/auth/login', {
         username,
         password,
         role,
