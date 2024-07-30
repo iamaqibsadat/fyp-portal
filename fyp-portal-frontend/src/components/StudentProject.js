@@ -17,7 +17,7 @@ const StudentProject = () => {
           throw new Error('No token found');
         }
 
-        const response = await axios.get('http://localhost:3000/api/projects/myprojects', {
+        const response = await axios.get('${API_BASE_URL}/api/projects/myprojects', {
           headers: {
             Authorization: `Bearer ${token}`
           }
